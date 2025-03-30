@@ -1,35 +1,58 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from "react";
+import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
+import { initialData } from "./data";
+import Dashboard from "./components/dashboard";
+import EatingContest from "./components/EatingContest";
+import CalendarView from "./components/CalendarView";
+import KitchenInventory from "./components/KitchenInventory";
+import Vouchers from "./components/Vouchers";
+import BirthdayAlert from './components/BirthdayAlert';
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [state, setState] = useState(initialData);
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <Router>
+        <nav className="navbar">
+        <div className="container">
+          <Link to="/">🌟 Michelin Dashboard</Link>
+          <div className="nav-links">
+            <Link to="/">Tables</Link>
+            <Link to="/contest">Steak Contest</Link>
+            <Link to="/calendar">Calendar</Link>
+            <Link to="/vouchers">Vouchers</Link>
+            <Link to="/kitchen">Kitchen</Link>
+          </div>
+        </div>
+      </nav>
+
+      <div className="container mt-4">
+      <BirthdayAlert reservations={state.reservations} />
+        <Routes>
+          <Route
+            path="/"
+            element={<Dashboard state={state} setState={setState} />}
+          />
+          <Route
+            path="/contest"
+            element={<EatingContest state={state} setState={setState} />}
+          />
+          <Route
+            path="/calendar"
+            element={<CalendarView state={state} setState={setState} />}
+          />
+          <Route
+            path="/vouchers"
+            element={<Vouchers state={state} setState={setState} />}
+          />
+          <Route
+            path="/kitchen"
+            element={<KitchenInventory state={state} setState={setState} />}
+          />
+        </Routes>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    </Router>
+  );
 }
 
-export default App
+export default App;
