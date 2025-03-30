@@ -4,8 +4,6 @@ const KitchenInventory = ({ state, setState }) => {
   const [newItem, setNewItem] = useState({ name: '', quantity: 0 });
   const [editingItem, setEditingItem] = useState(null);
   const [editQuantity, setEditQuantity] = useState('');
-
-  // Safely get inventory from state
   const inventory = state.inventory || {};
 
   const updateInventory = (itemName, amount) => {

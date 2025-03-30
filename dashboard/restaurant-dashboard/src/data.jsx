@@ -22,7 +22,7 @@ export const initialData = {
     ]
   },
 
-  reservations: [], // Properly initialized empty array
+  reservations: [],
 
   vouchers: [
     {
@@ -54,7 +54,6 @@ export const initialData = {
   specialDates: []
 };
 
-// Safe mapping with fallback
 initialData.reservations = (initialData.reservations || []).map(r => ({
   ...r,
   datetime: new Date(r.datetime).toISOString()

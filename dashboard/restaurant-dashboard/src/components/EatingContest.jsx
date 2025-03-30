@@ -4,9 +4,8 @@ const EatingContest = ({ state, setState }) => {
   const [newParticipant, setNewParticipant] = useState('');
   const [contestTime, setContestTime] = useState(0);
   const [isContestRunning, setIsContestRunning] = useState(false);
+  
   const [winner, setWinner] = useState(null);
-
-  // Timer effect
   useEffect(() => {
     let interval;
     if (isContestRunning) {
@@ -16,8 +15,6 @@ const EatingContest = ({ state, setState }) => {
     }
     return () => clearInterval(interval);
   }, [isContestRunning]);
-
-  // Check for winner
   useEffect(() => {
     if (state.contest.participants.some(p => p.steaks >= state.contest.record)) {
       const newWinner = [...state.contest.participants]

@@ -1,4 +1,3 @@
-// BirthdayAlert.jsx
 import { useEffect, useState } from 'react';
 
 const BirthdayAlert = ({ reservations }) => {
