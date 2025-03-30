@@ -1,28 +1,39 @@
+import { useState } from 'react';
 import Table from './Table';
 
 const Dashboard = ({ state, setState }) => {
+  const [compactView, setCompactView] = useState(true);
+
   const handleAddOrder = (tableId, item) => {
-    const updatedTables = state.tables.map(table => {
-      if (table.id === tableId) {
-        return {
-          ...table,
-          orders: [...table.orders, item],
-          bill: table.bill + item.price
-        };
-      }
-      return table;
-    });
+    const updatedTables = state.tables.map(table => 
+      table.id === tableId ? {
+        ...table,
+        orders: [...table.orders, item],
+        bill: table.bill + item.price,
+        status: 'occupied',
+        startTime: table.startTime || new Date().toISOString()
+      } : table
+    );
     setState({ ...state, tables: updatedTables });
   };
 
   return (
-    <div className="dashboard">
-      <h2 className="section-title">Tables Overview</h2>
-      <div className="grid">
+    <div className="container">
+      <div className="dashboard-header">
+        <h2>Table Overview</h2>
+        <button 
+          className={`button ${compactView ? 'active' : ''}`}
+          onClick={() => setCompactView(!compactView)}
+        >
+          {compactView ? 'Normal View' : 'Compact View'}
+        </button>
+      </div>
+
+      <div className={`dashboard-grid ${compactView ? 'compact-view' : ''}`}>
         {state.tables.map(table => (
-          <Table 
+          <Table
             key={table.id}
-            table={table} 
+            table={table}
             menu={state.menu}
             onAddOrder={handleAddOrder}
             setState={setState}

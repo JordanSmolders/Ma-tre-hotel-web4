@@ -14,17 +14,19 @@ function App() {
   return (
     <Router>
         <nav className="navbar">
-        <div className="container">
-          <Link to="/">🌟 Michelin Dashboard</Link>
-          <div className="nav-links">
-            <Link to="/">Tables</Link>
-            <Link to="/contest">Steak Contest</Link>
-            <Link to="/calendar">Calendar</Link>
-            <Link to="/vouchers">Vouchers</Link>
-            <Link to="/kitchen">Kitchen</Link>
-          </div>
-        </div>
-      </nav>
+  <div className="nav-container">
+    <div className="nav-brand">
+      <span className="logo">🍽️</span>
+      <h1>Restaurant Dashboard</h1>
+    </div>
+    <div className="nav-links">
+      <Link to="/" className="nav-link">Dashboard</Link>
+      <Link to="/contest" className="nav-link">Contest</Link>
+      <Link to="/kitchen" className="nav-link">Kitchen</Link>
+      <Link to="/vouchers" className="nav-link">Vouchers</Link>
+    </div>
+  </div>
+</nav>
 
       <div className="container mt-4">
       <BirthdayAlert reservations={state.reservations} />
